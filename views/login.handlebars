@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/loginStyles.css">
+<div class="card position-absolute top-50 start-50 translate-middle" style="width: 30rem;">
+  <div class="card-body">
+    <h3 class="card-title"><strong>Вход</strong></h3>
+    <form id="form">
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input type="text" class="form-control" id="inputEmail" placeholder="name@example.com" required="">
+        <div id="info" style="text-align: center; color: rgb(235, 43, 43);"></div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">Пароль</label>
+        <input type="password" class="form-control" id="inputPassword" required="">
+        <div id="infoPass" style="text-align: center; color: rgb(235, 43, 43);"></div>
+      </div>
+      
+      <div class="d-grid gap-2">
+        <button class="btn btn-secondary login" type="button" id="login">Войти</button>
+        <button class="btn btn-secondary" type="button" id="register" href='/register'>Зарегистрироваться</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="/login.js">

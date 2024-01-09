@@ -1,0 +1,24 @@
+.card {
+  background-color: #f6f6fb; 
+  color: #000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+.login {
+  background-color: #317cb9; 
+  color: white;
+  font-weight: bold; 
+  border-radius: 2px; 
+}
+#register {
+background-color: #d3d3eb;
+color: white; 
+font-weight: bold; 
+border-radius: 2px;
+}
+#register:hover {
+background-color: #317cb9;
+color: white; 
+font-weight: bold; 
+border-radius: 2px;
+}
