@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="/generalStyles.css">
+<link rel="stylesheet" href="/loginStyles.css">
+<div class="container">
+    <div class="row mt-2" id="infoBlock">
+        <div class="col-md-4 mx-auto">
+            <h2><strong>Пациенты</strong></h2>
+        </div>
+        <div class="col-md-4 mx-auto">
+            <button type="submit" class="common btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalButton"><img src="/free-icon-add-user-9434513.png" class="icon"> Регистрация нового пациента</button>
+        </div>
+    </div>
+    <form class="row col-md-12 container mt-2 cards">
+        <div class="headerLogin">
+            <h3><strong>Фильтры и сортировка</strong></h3>
+        </div>
+        <div class="col-md-6 input-control">
+            <label for="inputName" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="inputName" placeholder="Иванов Иван Иванович">
+        </div>
+        <div class="col-md-6 input-control">
+          <label for="inputСonclusion" class="form-label">Имеющиеся заключения</label>
+          <select class="form-select" aria-label="Default select example" id="inputСonclusion" multiple="multiple" >
+            <option value="" disabled selected id="example">Выберите заключение</option>
+            <option value="Disease">Заболевание</option>
+            <option value="Recovery">Восстановление</option>
+            <option value="Death">Смерть</option>
+          </select>
+        </div>
+        <div class="row align-items-center">
+            <div class="form-check form-switch col-md-5 fs-5">
+          <input class="form-check-input" type="checkbox" id="scheduledVisits">
+          <div style="font-size: 16px;">
+                <label class="form-check-label" for="scheduledVisits">Есть запланированные визиты</label>
+          </div>
+       </div>
+        <div class="form-check form-switch col-md-3 fs-5">
+          <input class="form-check-input" type="checkbox" id="onlyMine">
+          <div style="font-size: 16px;">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Мои пациенты</label>
+          </div>
+        </div>
+        <div class="col-md-4 input-control">
+          <label for="inputGender" class="form-label">Сортировка пациентов</label>
+          <select class="form-select" aria-label="Default select example" id="sortingPatients">
+            <option value="NameAsc">По имени (А-Я)</option>
+            <option value="NameDesc">По имени (Я-А)</option>
+            <option value="CreateAsc">По дате (Возрастание)</option>
+            <option value="CreateDesc">По дате (Убывание)</option>
+            <option value="InspectionAsc">InspectionAsc</option>
+            <option value="InspectionDesc ">InspectionDesc</option>
+          </select>
+        </div>
+        </div>
+        
+        <div class="row align-items-center">
+            <div class="col input-control">
+            <label for="inputGender" class="form-label">Число пациентов на страницу</label>
+            <input type="text" class="form-control" id="inputSize" placeholder="5">
+            </div>
+            <div class="col"></div>
+            <div class="col-md-5">
+            <button type="submit" class="common btn btn-primary col-sm-5" id="search">Поиск</button>
+            </div>
+        </div>
+        
+      </form>
+      <div class="container" id="listOfPatients"></div>
+
+    <div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content" id="modalWindow">
+            <form class="row conteiner  cards">
+                <div class="headerLogin">
+                    <h2><strong>Регистрация пациента</strong></h2>
+                </div>
+                <div class="mb-3">
+                <label for="inputName" class="form-label">Имя</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Иванов Иван Иванович" required="">
+                <div id="infoName" style="text-align: center; color: rgb(235, 43, 43);"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="inputGender" class="form-label">Пол</label>
+                    <select class="form-select" id="inputGender">
+                        <option value="Male">Мужской</option>
+                        <option value="Female">Женский</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="inputBirthDate" class="form-label">Дата рождения</label>
+                    <input type="date" class="form-control" id="inputBirthDate" min="1900-01-01" required="">
+                    <div id="infoDate" style="text-align: center; color: rgb(235, 43, 43);"></div>
+                </div>
+            </div>
+                <div class="d-grid gap-2">
+                <button class="btn btn-secondary login mb-2" type="button" id="registerRequset">Зарегистрироваться</button>
+                </div>
+            </form>
+            </div>
+        </div>
+      </div>
+</div>
+<script src="/register.js"></script>
+
+    

@@ -19,13 +19,6 @@ var dateControl = document.querySelector('input[type="date"]');
 var now = new Date().toISOString().split('T')[0];
 dateControl.max = now;
 
-$('.phone-field').inputmask("+7 (999) 999-99-99");
-
-function validateName(name) {
-    return /^[а-яА-ЯёЁa-zA-Z\s]{1,1000}$/.test(name);
-}
-
-
 function validateBirthDate(birthDate) 
 {
     var today = new Date();
@@ -38,13 +31,22 @@ function validateBirthDate(birthDate)
 document.getElementById('inputBirthDate').addEventListener('input', function () {
     var birthDate = this.value;
     if (!validateBirthDate(birthDate)) {
+        $("#inputBirthDate").addClass("is-invalid");
         document.getElementById('infoDate').innerText = 'Пожалуйста, выберите корректную дату рождения (не позднее сегодняшнего дня и не раньше 01.01.1900).';
         regButton.disabled = true;
     } else {
         document.getElementById('infoDate').innerText = '';
+        $("#inputBirthDate").removeClass("is-invalid");
         regButton.disabled = false;
     }
 });
+
+$('.phone-field').inputmask("+7 (999) 999-99-99");
+
+function validateName(name) {
+    return /^[а-яА-ЯёЁa-zA-Z\s]{1,1000}$/.test(name);
+}
+
 
 $(document).ready(function () {
     $("#registerRequset").click(function () {
@@ -55,6 +57,7 @@ $(document).ready(function () {
         var inputGender = $("#inputGender").val();
         var inputSpeciality = $("#inputSpeciality").val();
         var inputDate = $("#inputBirthDate").val();
+        var inputPhone = $("#inputPhone").val();
 
         if (inputName === "") {
             $("#inputName").css("border-color", "red");
@@ -102,7 +105,8 @@ $(document).ready(function () {
                     name: inputName,
                     gender: inputGender,
                     birthday: inputDate,
-                    speciality: inputSpeciality
+                    speciality: inputSpeciality,
+                    phone: inputPhone
                     }),
                 success: function (response) {
                     localStorage.setItem('token', response.token);

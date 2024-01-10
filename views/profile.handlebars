@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/loginStyles.css">
+<div class="container">
+    <div class="alert alert-warning mt-5 mx-auto d-none" id="alertData" style="width: 30rem;" role="alert">
+    Пользователь с этой почтой уже сущетсвует
+    </div>
+    <div class="card mx-auto mt-5" style="width: 30rem;">
+    <div class="card-body">
+        <h3 class="card-title"><strong>Профиль</strong></h3>
+        <form id="form">
+            <div class="mb-3">
+                <label for="inputName" class="form-label">Имя</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Иванов Иван Иванович" required="">
+                <div id="infoName" style="text-align: center; color: rgb(235, 43, 43);"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="inputGender" class="form-label">Пол</label>
+                    <select class="form-select" id="inputGender">
+                        <option value="Male">Мужской</option>
+                        <option value="Female">Женский</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="inputBirthDate" class="form-label">Дата рождения</label>
+                    <input type="date" class="form-control" id="inputBirthDate" min="1900-01-01" required="">
+                    <div id="infoDate" style="text-align: center; color: rgb(235, 43, 43);"></div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="inputPhone" class="form-label">Номер телефона</label>
+                <input type="text" class="form-control phone-field" id="inputPhone" placeholder="+7 (XXX) XXX-XX-XX" required="">
+                <div id="infoPhone" style="text-align: center; color: rgb(235, 43, 43);"></div>
+            </div>
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="name@example.com" required="">
+                <div id="info" style="text-align: center; color: rgb(235, 43, 43);"></div>
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-secondary login" type="button" id="profileRequset">Сохранить изменения</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+<script src="/profile.js"></script>
+<script src="/register.js"></script>
+<script src="/login.js">

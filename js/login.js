@@ -4,8 +4,10 @@ var infoDiv = document.getElementById('info');
 var infoDivPass = document.getElementById('infoPass')
 var loginButton1 = document.getElementById('login')
 var regButton1 = document.getElementById('registerRequset');
-if (loginButton1 == null) var loginButton = regButton1;
-else var loginButton = loginButton1;
+var profButton = document.getElementById('profileRequset');
+// if (loginButton1 == null) var loginButton = regButton1;
+// else var loginButton = loginButton1;
+var loginButton = loginButton1 !== null ? loginButton1 : (regButton1 !== null ? regButton1 : profButton);
 if(document.getElementById('register'))
 {
     document.getElementById('register').addEventListener('click', function () {
@@ -16,6 +18,7 @@ if(document.getElementById('register'))
 function validatePassword() {
     if (passwordInput.value.length < 6) {
         infoDivPass.innerText = 'Минимальная длина пароля 6 символов';
+        $("#inputPassword").addClass("is-invalid");
         infoDivPass.style.color = 'rgb(235, 43, 43)';
         passwordInput.style.borderColor = 'rgb(235, 43, 43)';
         loginButton.disabled = true;
@@ -26,6 +29,7 @@ function validatePassword() {
         infoDivPass.innerText = 'Пароль должен содержать хотя бы одну цифру';
         infoDivPass.style.color = 'rgb(235, 43, 43)';
         passwordInput.style.borderColor = 'rgb(235, 43, 43)';
+        $("#inputPassword").addClass("is-invalid");
         loginButton.disabled = true;
         return;
     }
@@ -33,13 +37,17 @@ function validatePassword() {
     infoDivPass.innerText = '';
     infoDivPass.style.color = '';
     passwordInput.style.borderColor = '';
+    $("#inputPassword").removeClass("is-invalid");
     loginButton.disabled = false;
 }
 
-passwordInput.addEventListener('input', function () {
-    clearTimeout(passwordInput.timer);
-    passwordInput.timer = setTimeout(validatePassword, 100);
-});
+if (passwordInput!=null){
+    passwordInput.addEventListener('input', function () {
+        clearTimeout(passwordInput.timer);
+        passwordInput.timer = setTimeout(validatePassword, 100);
+    });
+}
+
 
 function validateEmail() {
 var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,6 +55,7 @@ if (!emailRegex.test(emailInput.value)) {
     infoDiv.innerText = 'Некорректный адрес электронной почты';
     infoDiv.style.color = 'rgb(235, 43, 43)';
     emailInput.style.borderColor = 'rgb(235, 43, 43)';
+    $("#inputEmail").addClass("is-invalid");
     loginButton.disabled = true;
     return;
 }
@@ -54,6 +63,7 @@ if (!emailRegex.test(emailInput.value)) {
 infoDiv.innerText = '';
 infoDiv.style.color = '';
 emailInput.style.borderColor = '';
+$("#inputEmail").removeClass("is-invalid");
 loginButton.disabled = false;
 }
 
