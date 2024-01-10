@@ -81,7 +81,7 @@ if(document.getElementById('login'))
         data: JSON.stringify({ email: emailInput.value, password: passwordInput.value }),
         success: function (response) {
             localStorage.setItem('token', response.token);
-    
+            window.location.href = '/patients';
         },
         error: function (error) {
             infoDivPass.innerText = 'Проверьте свои данные';

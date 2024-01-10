@@ -7,6 +7,7 @@ const port= 7000;
 app.use(express.static('js'));
 app.use(express.static('styles'));
 app.use(express.static('images'));
+app.use(express.static('embeddedHTML'));
 app.engine(
     'handlebars',
     handlebars.engine({ defaultLayout: 'main' })
