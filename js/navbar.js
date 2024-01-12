@@ -27,7 +27,7 @@ $.ajax({
     },
     error: function (error, status) {
         console.error("Ошибка при получении профиля:", error);
-        if (status === 401)
+        if (status == 401)
         {
             // localStorage.setItem('name','');
             // localStorage.setItem('gender','');
@@ -54,6 +54,7 @@ $("#logoutButton").click(function (){
         },
         error: function (error, status) {
             console.error("Ошибка при получении профиля:", error);
+            window.location.href = '/login';
             if (status === 401)
             {
                 window.location.href = '/login';

@@ -84,7 +84,18 @@ function loadPage() {
     container.empty();
 
     patients.forEach(function (patient) {
-      let birthDate = patient.birthday.slice(0,10);
+      let birthDate = patient.birthday;
+      var stringBirthday;
+      if (birthDate === null)
+      {
+        stringBirthday = '';
+      }
+      else{
+        stringBirthday = `<div class="d-flex">
+        <p class="card-text text-muted">Дата рождения- </p>
+        <p class="card-text">${patient.birthday.slice(0,10)}</p>
+    </div>`;
+      }
       var card = `
             <div class="col-lg-6 col-md-6 col-sm-12 mt-3" style="cursor: pointer;" onclick="handleCardClick('${patient.id}')">
             <div class="card">
@@ -94,10 +105,7 @@ function loadPage() {
                     <p class="card-text text-muted">Пол- </p>
                     <p class="card-text">${patient.gender}</p>
                 </div>
-                <div class="d-flex">
-                    <p class="card-text text-muted">Дата рождения- </p>
-                    <p class="card-text">${birthDate}</p>
-                </div>
+                ${stringBirthday}
                 </div>
             </div>
             </div>

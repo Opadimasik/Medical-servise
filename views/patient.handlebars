@@ -15,11 +15,11 @@
             <h4><strong><p id="patientName"></p></strong></h4>
         </div>
         <div class="col" id="patientGender">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="male" fill="currentColor" class="bi bi-gender-male d-none" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="male" fill="currentColor" class="bi bi-gender-male d-none" viewBox="0 0 16 16" style="color: #317cb9;">
             <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"/>
             </svg>
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="female" fill="currentColor" class="bi bi-gender-female d-none" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="female" fill="currentColor" class="bi bi-gender-female d-none" viewBox="0 0 16 16" style="color: #317cb9;">
             <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8M3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5"/>
             </svg>
         </div>
@@ -28,19 +28,37 @@
             <p class="col" id="birthday">11.11.1212</p>
         </div>
     </div>
-    <div class="conteiner card">
-        <div class="row align-justify-center">
+    <div class="row cards">
+        <div class="row mt-2 ms-2 align-items-center">
             <div class="col-4">
-                <label for="inputMKB-10" class="form-label text-muted">Специальность</label>
-                <select class="form-select" id="inputMKB-10">
-                </select>
+                <label for="inputMKB-10" class="form-label text-muted">МКБ-10</label>
+                <select class="js-example-basic-multiple js-states form-control" id="inputMKB-10" multiple="multiple"></select>
             </div>
-            <div class="col">
-                
+            <div class="col-md ms-2">
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radioInline" id="inlineRadioDefault">
+                <label class="form-check-label" for="inlineRadioDefault">Сгруппировать по повторным</label>
+                </div>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radioInline" id="inlineRadioChecked" checked="">
+                <label class="form-check-label" for="inlineRadioChecked">Показать все</label>
+                </div>
+            </div>
+        </div>
+        <div class="row ms-2 mt-2 align-items-center">
+            <div class="col-auto input-control">
+            <label for="inputSize" class="form-control-label text-muted">Число пациентов на страницу</label>
+            <input type="number" class="form-control mb-3" min="1" id="inputSize" value="5" placeholder="5">
+            </div>
+            <div class="col"></div>
+            <div class="me-2 col-auto">
+            <button type="submit" class="common btn btn-primary " id="search">Поиск</button>
             </div>
         </div>
     </div>
+    <div class="row row-cols-2" id="listOfInspection">
+      </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script src="/patient.js"></script>
     
