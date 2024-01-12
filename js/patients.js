@@ -136,7 +136,9 @@ function loadPage() {
     </li>`;
     paginationContainer.append(nextItem);
   }
-  
+  function handleCardClick(patientId) {
+    window.location.href = `/patient/${patientId}`;
+}
   
 
   $(document).ready(function () {
@@ -144,9 +146,7 @@ function loadPage() {
 
     loadPage();
 
-    function handleCardClick(patientId) {
-        window.location.href = `/patient-details?id=${patientId}`;
-    }
+    
 
     $("#search").click(function () {
         currentName = $("#inputName").val();

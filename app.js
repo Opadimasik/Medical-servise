@@ -35,6 +35,12 @@ app.get('/patients/', (req, res) => {
         title:'Пациенты' 
     });
 });
+app.get('/patient/:id', (req, res) => {
+    res.render('patient', {
+        title:'Карта пациента' ,
+        id: req.params.id
+    });
+});
 app.listen(port,host, function () {
     console.log(`Server listens http://${host}:${port}`);
 });

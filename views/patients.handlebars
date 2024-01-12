@@ -1,14 +1,19 @@
 <link rel="stylesheet" href="/generalStyles.css">
 <link rel="stylesheet" href="/loginStyles.css">
 <div class="container">
+
+
     <div class="row mt-2" id="infoBlock">
-        <div class="col-md-4 mx-auto">
+        <div class="col-auto ">
             <h2><strong>Пациенты</strong></h2>
         </div>
-        <div class="col-md-4 mx-auto">
+        <div class="col"></div>
+        <div class="col-4">
             <button type="submit" class="common btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalButton"><img src="/free-icon-add-user-9434513.png" class="icon"> Регистрация нового пациента</button>
         </div>
     </div>
+
+
     <form class="row col-md-12 container mt-2 cards">
         <div class="headerLogin">
             <h3><strong>Фильтры и сортировка</strong></h3>
@@ -53,18 +58,26 @@
         </div>
         
         <div class="row align-items-center">
-            <div class="col input-control">
+            <div class="col-auto input-control">
             <label for="inputGender" class="form-label">Число пациентов на страницу</label>
-            <input type="text" class="form-control" id="inputSize" placeholder="5">
+            <input type="number" class="form-control" min="1" id="inputSize" placeholder="5">
             </div>
             <div class="col"></div>
-            <div class="col-md-5">
-            <button type="submit" class="common btn btn-primary col-sm-5" id="search">Поиск</button>
+            <div class="col-auto">
+            <button type="submit" class="common btn btn-primary " id="search">Поиск</button>
             </div>
         </div>
         
       </form>
-      <div class="container" id="listOfPatients"></div>
+      <div class="row row-cols-2" id="listOfPatients">
+      </div>
+
+    <div class="container mt-5">
+    <ul class="pagination justify-content-center" id="pagination">
+    </ul>
+    </div>
+
+
 
     <div class="modal" id="exampleModal" tabindex="-1">
         <div class="modal-dialog">
@@ -74,9 +87,9 @@
                     <h2><strong>Регистрация пациента</strong></h2>
                 </div>
                 <div class="mb-3">
-                <label for="inputName" class="form-label">Имя</label>
-                <input type="text" class="form-control" id="inputName" placeholder="Иванов Иван Иванович" required="">
-                <div id="infoName" style="text-align: center; color: rgb(235, 43, 43);"></div>
+                <label for="inputNameReg" class="form-label">Имя</label>
+                <input type="text" class="form-control" id="inputNameReg" placeholder="Иванов Иван Иванович" required="">
+                <div id="infoNameReg" style="text-align: center; color: rgb(235, 43, 43);"></div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -93,13 +106,15 @@
                 </div>
             </div>
                 <div class="d-grid gap-2">
-                <button class="btn btn-secondary login mb-2" type="button" id="registerRequset">Зарегистрироваться</button>
+                <button class="btn btn-secondary login mb-2" type="button" id="registerPatientsRequset">Зарегистрировать</button>
                 </div>
             </form>
             </div>
         </div>
       </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="/register.js"></script>
+<script src="/patients.js"></script>
 
     
