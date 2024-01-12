@@ -1,4 +1,3 @@
-
 var authToken = localStorage.getItem('token');
 if (!authToken) {
     console.error("Токен авторизации отсутствует.");
@@ -85,18 +84,19 @@ function loadPage() {
     container.empty();
 
     patients.forEach(function (patient) {
+      let birthDate = patient.birthday.slice(0,10);
       var card = `
             <div class="col-lg-6 col-md-6 col-sm-12 mt-3" style="cursor: pointer;" onclick="handleCardClick('${patient.id}')">
             <div class="card">
                 <div class="card-body">
                 <h5 class="card-title">${patient.name}</h5>
                 <div class="d-flex">
-                    <p class="card-text" style="opacity: 0.7;">Пол- </p>
+                    <p class="card-text text-muted">Пол- </p>
                     <p class="card-text">${patient.gender}</p>
                 </div>
                 <div class="d-flex">
-                    <p class="card-text" style="opacity: 0.7;">Дата рождения- </p>
-                    <p class="card-text">${patient.birthday}</p>
+                    <p class="card-text text-muted">Дата рождения- </p>
+                    <p class="card-text">${birthDate}</p>
                 </div>
                 </div>
             </div>
