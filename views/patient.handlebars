@@ -36,11 +36,11 @@
             </div>
             <div class="col-md ms-2">
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="radioInline" id="inlineRadioDefault">
+                <input class="form-check-input" type="radio" name="radioInline" id="inlineRadioDefault" value="grouped">
                 <label class="form-check-label" for="inlineRadioDefault">Сгруппировать по повторным</label>
                 </div>
                 <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="radioInline" id="inlineRadioChecked" checked="">
+                <input class="form-check-input" type="radio" name="radioInline" id="inlineRadioChecked" checked="" value="all">
                 <label class="form-check-label" for="inlineRadioChecked">Показать все</label>
                 </div>
             </div>
@@ -58,6 +58,7 @@
     </div>
     <div class="row row-cols-2" id="listOfInspection">
       </div>
+    <ul id="pagination" class="pagination"></ul>
 </div>
 
 <script src="/patient.js"></script>

@@ -31,4 +31,15 @@
   border-radius: 2px;
   }
 
+  .details-link {
+    color: #317cb9;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.details-link:hover {
+    color: #215a8b;
+}
+
   
