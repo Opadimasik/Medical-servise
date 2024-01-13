@@ -1,0 +1,159 @@
+<link rel="stylesheet" href="/generalStyles.css">
+<div class="container col-12">
+    
+    <h2 class="col-auto"><strong>Создание осмотра</strong></h2>
+    <div class="card mx-auto mt-3 cards">
+        <div class="card-body">
+            <div class="row mt-2" id="infoBlockTwo">
+                <div class="col-auto ">
+            <h4><strong><p id="patientName"></p></strong></h4>
+        </div>
+        <div class="col" id="patientGender">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="male" fill="currentColor" class="bi bi-gender-male d-none" viewBox="0 0 16 16" style="color: #317cb9;">
+            <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8"/>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" id="female" fill="currentColor" class="bi bi-gender-female d-none" viewBox="0 0 16 16" style="color: #317cb9;">
+            <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8M3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5"/>
+            </svg>
+        </div>
+
+        <div class="d-flex col-4">
+            <p class="text-muted">Дата рождения-<pre> </pre></p>
+            <p class=""id="birthday">11.11.1212</p>
+        </div>
+            </div>
+        <div class="d-flex">
+            <label class="me-1" for="isFirstInspect">Первичный осмотр</label>
+            <div class="form-check form-switch col-md-5 fs-5">
+                <label class="form-check-label" for="isFirstInspect">Повторный осмотр</label>
+                <input class="form-check-input" type="checkbox" id="isFirstInspect">
+                <div style="font-size: 16px;"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group d-none" id="preInspectionGroup">
+                <label for="inputPreInspection" class="form-label text-muted">Предыдущий осмотр</label>
+                <select class="js-example-basic-multiple js-states form-control" id="inputPreInspection"></select>
+            </div>
+        </div>
+        
+
+        <div class="col-md-6 mb-3">
+            <label for="inputInspectDate" class="form-label text-muted">Дата осмотра</label>
+            <input type="datetime-local" class="form-control" id="inputInspectDate" min="1900-01-01" required="">
+            <div id="infoDate" style="text-align: center; color: rgb(235, 43, 43);"></div>
+        </div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Жалобы</strong></h4>
+            <div class="form-group">
+                <textarea class="form-control" id="complaints" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Анамез заболевание</strong></h4>
+            <div class="form-group">
+                <textarea class="form-control" id="anamnesis" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards" id="consultation">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Консультация</strong></h4>
+            <div id="addedConsultation"></div>
+            <div class="row mt-2 ms-2 align-items-center">
+                <div class="form-check form-switch col-md-5 fs-5">
+                    <label class="form-check-label" for="isConsultation">Требуется консультация</label>
+                    <input class="form-check-input " type="checkbox" id="isConsultation">
+                </div>
+                <div class="col-7">
+                    <select class="js-example-basic-multiple js-states form-control" aria-placeholder="Спецмализация консультанта" id="inputSpeciality" disabled></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-muted" for="consultationComment">Комментарий</label>
+                <textarea class="form-control" id="consultationComment" rows="2" disabled></textarea>
+            </div>
+            <button type="submit" class="common mt-2 btn btn-primary" onClick=""  id="addConsultation" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>
+                Добавить консультацию
+            </button>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Диагнозы</strong></h4>
+            <div id="addDiagnose"></div>
+            <div class="form-group">
+                <label for="inputMKB-10" class="form-label text-muted">Болезни</label>
+                <select class="js-example-basic-multiple js-states form-control" id="inputMKB-10"></select>
+            </div>
+            <div class="form-group mt-2">
+                <textarea class="form-control" placeholder="Расшифровка" id="diagnosDescription" rows="1"></textarea>
+            </div>
+            <p class="text-muted">Тип диагноза в осмотре</p>
+            <div class="col-md ms-2">
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radioInline" id="mainDiagnose" value="Main">
+                <label class="form-check-label" for="mainDiagnose">Оснвоной</label>
+                </div>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radioInline" id="concomitantDiagnose"  disabled value="Concomitant">
+                <label class="form-check-label" for="concomitantDiagnose">Сопутствующий</label>
+                </div>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radioInline" id="complicationDiagnose"  disabled value="Complication">
+                <label class="form-check-label" for="concomitantDiagnose">Осложнение</label>
+                </div>
+            </div>
+            <button type="submit" class="common  mt-2 btn btn-primary" onClick="addDiagnose()"  id="addDiagnose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                </svg>
+                Добавить диагноз
+            </button>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Рекомендации по лечению</strong></h4>
+            <div class="form-group">
+                <textarea class="form-control" id="recomend" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Заключение</strong></h4>
+            <div class="d-flex align-items-center" >
+                <div class="input-control">
+                    <label for="inputСonclusion" class="form-label text-muted">Заключения</label>
+                    <select class="form-select" aria-label="Default select example" id="inputСonclusion">
+                        <option value="" disabled selected id="example">Выберите заключение</option>
+                        <option value="Disease">Заболевание</option>
+                        <option value="Recovery">Восстановление</option>
+                        <option value="Death">Смерть</option>
+                    </select>
+                </div>
+                <div class="ms-3">
+                    <label for="inputInspectDate" class="form-label text-muted">Дата следующего визита</label>
+                    <input type="datetime-local" class="form-control" id="inputVisitDate" min="1900-01-01" required="">
+                    <div id="infoDate" style="text-align: center; color: rgb(235, 43, 43);"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <button class="btn btn-secondary common" type="button" id="login">Сохранить осмотр</button>
+        <button class="btn btn-secondary" type="button" id="register" href='/patients'>Отмена</button>
+    </div>
+</div>
+
+<script src="/inspectionCreate.js"></script>

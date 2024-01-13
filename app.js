@@ -41,6 +41,11 @@ app.get('/patient/:id', (req, res) => {
         id: req.params.id
     });
 });
+app.get('/inspection/create', (req, res) => {
+    res.render('inspectionCreate', {
+        title:'Создание осмотра' 
+    });
+});
 app.listen(port,host, function () {
     console.log(`Server listens http://${host}:${port}`);
 });

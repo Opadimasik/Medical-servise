@@ -3,6 +3,7 @@ var fullUrl = window.location.href;
 var patientId = fullUrl.split(
     "http://localhost:7000/patient/"
 );
+let currentInspectionId = null;
 function fillPatientData(patient)
 {
     $("#patientName").text(patient.name);
@@ -59,6 +60,14 @@ $('#inputMKB-10').select2({
     window.location.href = `/inspection/${inspectionId}`;
 }
 function addInpectionClick(inspectionId) {
+    
+    localStorage.setItem('patientId',patientId[1]);
+    console.log(inspectionId);
+    if(inspectionId === null)
+    {
+        localStorage.setItem('preInspectionId',"");
+    }
+    else localStorage.setItem('preInspectionId',inspectionId);
     window.location.href = `/inspection/create`;
 }
 
@@ -82,7 +91,13 @@ function createInspectioncard(cardClass,style,buttonClass,inspection,addInspecti
                         ${inspection.date.slice(0,10)}
                     </div>
                     <h5 class="ms-1 card-title"><strong>Амбулаторный осмотр</strong></h5>
-                    ${addInspection}
+                    <a class="ms-1 ${addInspection} details-link" id="addNestedInspection" onclick="addInpectionClick('${inspection.id}')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                    </svg>
+                    <span class="ms-2">Добавть осмотр</span>
+                    </a>
                     <a class="ms-1 details-link" onclick="detailInpectionClick('${inspection.id}')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -117,15 +132,7 @@ function inspectionChain(inspectionId1){
           var conclusionDate;
           var buttonClass = "d-none";
           var cardClass = "6";
-          var addInspection = `
-          <a class="ms-1 details-link" id="addNestedInspection" onclick="addInpectionClick()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square">
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-          </svg>
-          <span class="ms-2">Добавть осмотр</span>
-          </a>
-          `;
+          var addInspection = ``;
           if ($('input[name=radioInline]:checked').val() === "grouped") 
           {
               cardClass = "12";
@@ -148,7 +155,7 @@ function inspectionChain(inspectionId1){
                     {
                       case "Death":
                       {
-                          addInspection = "";
+                          addInspection = "d-none";
                           conclusionDate = "смерть";
                           style = `style="color: #ffefe8;"`;
                       }
@@ -161,7 +168,7 @@ function inspectionChain(inspectionId1){
                           conclusionDate = "болезнь";
                       }
                     }
-                    if(inspection.hasNested === true) addInspection="";
+                    if(inspection.hasNested === true) addInspection="d-none";
                     if(inspection.hasNested === false)
                     {
                         buttonMinus="";
@@ -190,15 +197,7 @@ function inspectionChain(inspectionId1){
     var conclusionDate;
     var buttonClass = "d-none";
     var cardClass = "6";
-    var addInspection = `
-    <a class="ms-1 details-link" id="addNestedInspection" onclick="addInpectionClick()">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square">
-        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-    </svg>
-    <span class="ms-2">Добавть осмотр</span>
-    </a>
-    `;
+    var addInspection = ``;
     if ($('input[name=radioInline]:checked').val() === "grouped") 
     {
         cardClass = "12";
@@ -209,7 +208,7 @@ function inspectionChain(inspectionId1){
       {
         case "Death":
         {
-            addInspection = "";
+            addInspection = "d-none";
             conclusionDate = "смерть";
             style = `style="color: #ffefe8;"`;
         }
@@ -222,7 +221,7 @@ function inspectionChain(inspectionId1){
             conclusionDate = "болезнь";
         }
       }
-      if(inspection.hasNested === true) addInspection="";
+      if(inspection.hasNested === true) addInspection="d-none";
       const mainDiagnosis = inspection.diagnosis.name;
       var card = createInspectioncard(cardClass,style,buttonClass,inspection,addInspection,conclusionDate,mainDiagnosis);
 
@@ -237,6 +236,12 @@ function inspectionChain(inspectionId1){
     }
   }
 
+  
+  $(document).on('click', '.add-link', function() {
+    var cardBody = $(this).closest('.card-body');
+    var inspectionId = cardBody.attr('value');
+    inspectionChain(inspectionId);
+});
 function loadInspectionPage(page, size,request="")
 {
     $.ajax({
