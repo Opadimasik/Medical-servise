@@ -123,12 +123,12 @@ function loadPage() {
     var startPage = Math.max(1, pagination.current - Math.floor(totalButtonsToShow / 2));
     var endPage = Math.min(pagination.count, startPage + totalButtonsToShow - 1);
   
-    var previousItem = `<li class="page-item ${pagination.current === 1 ? 'disabled' : ''}">
-      <a class="page-link" href="#" onclick="loadPage(${pagination.current - 1})" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>`;
-    paginationContainer.append(previousItem);
+    // var previousItem = `<li class="page-item ${pagination.current === 1 ? 'disabled' : ''}">
+    //   <a class="page-link" href="#" onclick="loadPage(${pagination.current - 1})" aria-label="Previous">
+    //     <span aria-hidden="true">&laquo;</span>
+    //   </a>
+    // </li>`;
+    // paginationContainer.append(previousItem);
   
     for (var i = startPage; i <= endPage; i++) {
       var pageItem = `<li class="page-item ${pagination.current === i ? 'active' : ''}">
@@ -137,12 +137,12 @@ function loadPage() {
       paginationContainer.append(pageItem);
     }
 
-    var nextItem = `<li class="page-item ${pagination.current === pagination.count ? 'disabled' : ''}">
-      <a class="page-link" href="#" onclick="loadPage(${pagination.current + 1})" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>`;
-    paginationContainer.append(nextItem);
+    // var nextItem = `<li class="page-item ${pagination.current === pagination.count ? 'disabled' : ''}">
+    //   <a class="page-link" href="#" onclick="loadPage(${pagination.current + 1})" aria-label="Next">
+    //     <span aria-hidden="true">&raquo;</span>
+    //   </a>
+    // </li>`;
+    // paginationContainer.append(nextItem);
   }
   function handleCardClick(patientId) {
     window.location.href = `/patient/${patientId}`;

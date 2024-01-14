@@ -21,14 +21,13 @@ $.ajax({
         fillPatientData(response);
     },
     error: function (error, status) {
-        console.error("Ошибка при получении профиля:", error);
-        if (status === 401)
-        {
+        var status = error.status;
+        console.error("Ошибка при создании осмотра:", status);
+        if (status === 401) {
             window.location.href = '/login';
         }
-        else if(status === 404)
-        {
-            window.location.href = 'patients';
+        else if(status===404){
+            window.location.href = '/patients';
         }
     }
 });
@@ -99,21 +98,21 @@ function getPreviousInspection()
             });
         },
         error: function (error, status) {
-            console.error("Ошибка при получении профиля:", error);
-            if (status === 401)
-            {
+            var status = error.status;
+            console.error("Ошибка при создании осмотра:", status);
+            if (status === 401) {
                 window.location.href = '/login';
             }
             else if(status === 404)
             {
-                window.location.href = 'patients';
+                window.location.href = '/patients';
             }
         }
     });
 }
 getPreviousInspection();
 
-if(preInspectionId!==null)
+if(preInspectionId!=='')
 {
     $("#isFirstInspect").prop("checked", true);
     $('#preInspectionGroup').removeClass('d-none');
@@ -148,7 +147,7 @@ fetch('https://mis-api.kreosoft.space/api/dictionary/speciality?page=1&size=18')
 .catch(error => {
     console.error('Error fetching data:', error);
 });
-
+var consultationsData = [];
 $('#addConsultation').click(function() {
     var isConsultationRequired = $('#isConsultation').prop('checked');
     var specialityValue = $('#inputSpeciality option:selected').text();
@@ -160,7 +159,11 @@ $('#addConsultation').click(function() {
 
         var consultationElement = $('<div></div>').html(consultationText);
         $('#addedConsultation').append(consultationElement);
-
+        var consultationData = {
+            specialityId: $('#inputSpeciality option:selected').val(),
+            comment: commentValue
+        };
+        consultationsData.push(consultationData);
         $('#isConsultation').prop('checked', false);
         $('#inputSpeciality').val('').prop('disabled', true);
         $('#consultationComment').val('').prop('disabled', true);
@@ -194,7 +197,7 @@ $('#inputMKB-10').select2({
         return {
           results: data.records.map(function(item) {
             return {
-              id: item.id,
+              id: `${item.id}`,
               text: `${item.code}- ${item.name}`
             };
           }),
@@ -208,12 +211,11 @@ $('#inputMKB-10').select2({
     placeholder: 'Выбрать',
     minimumInputLength: 1 
   });
-
+  var diagnosesData = [];
   function addDiagnose() {
     var selectedDiagnose = $('#inputMKB-10 option:selected').text();
     var selectedType = $('input[name=radioInline]:checked').val();
     var description = $('#diagnosDescription').val();
-    console.log(selectedType);
     switch (selectedType) {
         case "Complication":
             selectedType = "Осложнение";
@@ -234,6 +236,14 @@ $('#inputMKB-10').select2({
         `;
 
         $('#addDiagnose').append(diagnoseElement);
+        var id = $('#inputMKB-10 option:selected').val();
+        console.log(id);
+        var diagnoseData = {
+            icdDiagnosisId: id,
+            description: description,
+            type: $('input[name=radioInline]:checked').val()
+        };
+        diagnosesData.push(diagnoseData);
 
         $('#inputMKB-10').val('').trigger('change');
         $('#diagnosDescription').val('');
@@ -273,67 +283,47 @@ conclusionSelect.on('change', function() {
 
 $("#register").click(function(){
     window.location.href = `/patient/${patientId}`
-})
-
-var isFirstInspect = $('#isFirstInspect').prop('checked');
-var previousInspectionId = isFirstInspect ? `"previousInspectionId": "${preInspectionId}",` :"";
-var inspectDate = $('#inputInspectDate').val();
-var complaints = $('#complaints').val();
-var anamnesis = $('#anamnesis').val();
-var isConsultationRequired = $('#isConsultation').prop('checked');
-var specialityId = isConsultationRequired ? $('#inputSpeciality').val() : null;
-var consultationComment = isConsultationRequired ? $('#consultationComment').val() : null;
-var diagnoses = [];
-
-$('#addDiagnose').find('div').each(function(index, element) {
-    var selectedDiagnose = $(element).find('strong').text();
-    var selectedType = $(element).find('.text-muted').eq(0).text().replace('Тип в осмотре: ', '');
-    var description = $(element).find('.text-muted').eq(1).text().replace('Расшифровка: ', '');
-
-    var diagnose = {
-        icdDiagnosisId: selectedDiagnose.id,
-        description: description,
-        type: selectedType
-    };
-
-    diagnoses.push(diagnose);
 });
 
-// Получение данных о заключении
-var selectedConclusion = $('#inputСonclusion').val();
-var nextVisitDate = null;
-var deathDate = null;
 
-if (selectedConclusion === 'Disease' || selectedConclusion === 'Death') {
-    nextVisitDate = $('#inputVisitDate').val();
-}
 
-if (selectedConclusion === 'Death') {
-    deathDate = $('#inputVisitDate').val();
-}
 
-// Формирование объекта запроса
-var inspectionData = {
-    date: inspectDate,
-    isFirstInspect: isFirstInspect,
-    preInspectionId: preInspectionId,
-    complaints: complaints,
-    anamnesis: anamnesis,
-    consultation: {
-        isRequired: isConsultationRequired,
-        specialityId: specialityId,
-        comment: consultationComment
-    },
-    diagnoses: diagnoses,
-    conclusion: {
-        conclusion: selectedConclusion,
-        nextVisitDate: nextVisitDate,
-        deathDate: deathDate
-    }
-};
+
+
 
 $('#login').click(function()
 {
+    var preInspectionValue = document.getElementById('inputPreInspection').value;
+    var inspectDate = document.getElementById('inputInspectDate').value;
+    var complaints = document.getElementById('complaints').value;
+    var anamnesis = document.getElementById('anamnesis').value;
+    var recomend = document.getElementById('recomend').value;
+
+    var selectedConclusion = document.getElementById('inputСonclusion').value;
+    var nextVisitDate = null;
+    var deathDate = null;
+
+    if (selectedConclusion === 'Disease' || selectedConclusion === 'Death') {
+        nextVisitDate = document.getElementById('inputVisitDate').value;
+    }
+
+    if (selectedConclusion === 'Death') {
+        deathDate = document.getElementById('inputVisitDate').value;
+    }
+
+    // Формирование объекта запроса
+    var inspectionData = {
+        date: inspectDate,
+        previousInspectionId: preInspectionValue,
+        complaints: complaints,
+        anamnesis: anamnesis,
+        treatment: recomend,
+        nextVisitDate: nextVisitDate,
+        deathDate: deathDate,
+        consultation: consultationsData,
+        diagnoses: diagnosesData,
+        conclusion: selectedConclusion
+    };
     console.log(inspectionData);
     $.ajax({
         url: `https://mis-api.kreosoft.space/api/patient/${patientId}/inspections`,
@@ -342,18 +332,24 @@ $('#login').click(function()
             'Authorization': 'Bearer ' + authToken,
             'Content-Type': 'application/json'
         },
-        data: JSON.stringify(inspectionData),
+        data: JSON.stringify(inspectionData, (key, value) => {
+            return (value === null || value === "") ? undefined : value;
+        }, 2)
+        ,
         success: function (response) {
-            // Обработка успешного ответа сервера
             console.log(response);
+            window.location.href = `/patient/${patientId}`;
         },
-        error: function (error, status) {
-            // Обработка ошибки
-            console.error("Ошибка при создании осмотра:", error);
+        error: function (error) {
+            var status = error.status;
+            console.error("Ошибка при создании осмотра:", status);
             if (status === 401) {
                 window.location.href = '/login';
+            }
+            else if(status===400){
+                $("#alertData").removeClass("d-none").addClass("d-block");
+                translateContent();
             }
         }
     });
 });
-

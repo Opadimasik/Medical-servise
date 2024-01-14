@@ -1,0 +1,155 @@
+<link rel="stylesheet" href="/generalStyles.css">
+<div class="container col-12">
+    <div class="card mx-auto mt-3 cards">
+        <div class="card-body">
+            <h2  style="color: #317cb9;" id="main-text"><strong ></strong></h2>
+            <button type="submit" class="common btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal" id="modalButton"> Редактировать осмотр</button>
+            <div class="row mt-2" id="infoBlockTwo">
+                <div class="col-auto ">
+            <strong><p id="patientName"></p></strong>
+        </div>
+        <p id="patientGender"></p>
+        <div class="d-flex">
+            <p>Дата рождения-<pre> </pre></p>
+            <p id="birthday">11.11.1212</p>
+        </div>
+        <p class="text-muted" id="patientDoctor"></p>
+            </div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Жалобы</strong></h4>
+            <div id="addComplaints"></div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Анамез заболевание</strong></h4>
+            <div id="addAnamnesis"></div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards" id="consultation">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Консультация</strong></h4>
+            <div id="addedConsultation"></div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Диагнозы</strong></h4>
+            <div id="addDiagnose"></div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Рекомендации по лечению</strong></h4>
+            <div id="addRecomend"></div>
+        </div>
+    </div>
+    <div class="card mx-auto mt-2 cards">
+        <div class="card-body">
+            <h4 class="card-title" style="color: #317cb9;"><strong>Заключение</strong></h4>
+            <div class="d-flex align-items-center" >
+                <strong id="concl"></strong>    
+            </div>
+            <div class="d-flex align-items-center" id="conclDate">   
+            </div>
+    </div>
+    </div>
+    <div class="alert alert-danger mt-5 mx-auto d-none" id="alertData" style="width: 100%;" role="alert">
+    Заполните все данные
+    </div>
+</div>
+
+<div class="modal" id="exampleModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" id="modalWindow">
+            <form class="row conteiner  cards">
+                <div class="headerLogin">
+                    <h2><strong>Редактирование осмотра</strong></h2>
+                </div>
+                <div class="card mx-auto mt-2 cards">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: #317cb9;"><strong>Жалобы</strong></h4>
+                        <div class="form-group">
+                            <textarea class="form-control" id="complaints" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-auto mt-2 cards">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: #317cb9;"><strong>Анамез заболевание</strong></h4>
+                        <div class="form-group">
+                            <textarea class="form-control" id="anamnesis" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-auto mt-2 cards">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: #317cb9;"><strong>Рекомендации по лечению</strong></h4>
+                        <div class="form-group">
+                            <textarea class="form-control" id="recomend" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mx-auto mt-2 cards">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: #317cb9;"><strong>Диагнозы</strong></h4>
+                        <div id="addOldDiag"></div>
+                        <div class="form-group">
+                            <label for="inputMKB-10" class="form-label text-muted">Болезни</label>
+                            <select class="js-example-basic-multiple js-states form-control" id="inputMKB-10"></select>
+                        </div>
+                        <div class="form-group mt-2">
+                            <textarea class="form-control" placeholder="Расшифровка" id="diagnosDescription" rows="1"></textarea>
+                        </div>
+                        <p class="text-muted">Тип диагноза в осмотре</p>
+                        <div class="col-md ms-2">
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="radioInline" id="mainDiagnose" disabled value="Main">
+                            <label class="form-check-label" for="mainDiagnose">Оснвоной</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="radioInline" id="concomitantDiagnose"  value="Concomitant">
+                            <label class="form-check-label" for="concomitantDiagnose">Сопутствующий</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="radioInline" id="complicationDiagnose" value="Complication">
+                            <label class="form-check-label" for="concomitantDiagnose">Осложнение</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="common  mt-2 btn btn-primary" onClick="addDiagnose()"  id="addDiagnose">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                            </svg>
+                            Добавить диагноз
+                        </button>
+                    </div>
+                </div>
+                <div class="card mx-auto mt-2 cards">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: #317cb9;"><strong>Заключение</strong></h4>
+                        <div class="d-flex align-items-center" >
+                            <div class="input-control">
+                                <label for="inputСonclusion" class="form-label text-muted">Заключения</label>
+                                <select class="form-select" aria-label="Default select example" id="inputСonclusion">
+                                    <option value="" disabled selected id="example">Выберите заключение</option>
+                                    <option value="Disease">Болезнь</option>
+                                    <option value="Recovery">Выздоровление</option>
+                                    <option value="Death">Смерть</option>
+                                </select>
+                            </div>
+                            <div class="ms-3 d-none" id="inputVisitDateGroup">
+                                <label for="inputInspectDate" id="inputInspectDateLabel" class="form-label text-muted">Дата следующего визита</label>
+                                <input type="datetime-local" class="form-control " id="inputVisitDate" min="1900-01-01" required="">
+                                <div id="infoDate" style="text-align: center; color: rgb(235, 43, 43);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+      </div>
+<script src="/inspection.js"></script>

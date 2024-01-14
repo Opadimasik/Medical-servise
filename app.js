@@ -51,6 +51,12 @@ app.get('/consultations', (req, res) => {
         title:'Конссультации' 
     });
 });
+app.get('/inspection/:id', (req, res) => {
+    res.render('inspection', {
+        title:'Осмотр' ,
+        id: req.params.id
+    });
+});
 app.listen(port,host, function () {
     console.log(`Server listens http://${host}:${port}`);
 });
