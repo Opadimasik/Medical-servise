@@ -10,6 +10,7 @@ function updateNavbar(profileData)
     $("#patientsLink").removeClass("d-none")
     $("#nameText").text(profileData.name);
     $("#profileDropdown").removeClass("d-none");
+    $("#consultationsLink").removeClass("d-none");
 }
 
 $.ajax({
@@ -51,6 +52,7 @@ $("#logoutButton").click(function (){
             $("#loginLink").removeClass("d-none");
             $("#patientsLink").addClass("d-none");
             $("#profileDropdown").addClass("d-none");
+            $("#consultationsLink").addClass("d-none");
         },
         error: function (error, status) {
             console.error("Ошибка при получении профиля:", error);

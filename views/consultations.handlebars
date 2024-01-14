@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="/generalStyles.css">
+<link rel="stylesheet" href="/loginStyles.css">
+<div class="container">
+    <div class="row mt-2" id="infoBlock">
+        <div class="col-auto ">
+            <h2><strong>Консультации</strong></h2>
+        </div>
+        <div class="col"></div>
+        <div class="col-4">
+            <button type="submit" class="common btn btn-primary" onclick="addInpectionClick(null)"  id="inspectionButton">Добавить осмотр</button>
+        </div>
+    </div>
+    <div class="row cards">
+        <div class="row mt-2 ms-2 align-items-center">
+            <div class="col-4">
+                <label for="inputMKB-10" class="form-label text-muted">МКБ-10</label>
+                <select class="js-example-basic-multiple js-states form-control" id="inputMKB-10" multiple="multiple"></select>
+            </div>
+            <div class="col-md ms-2">
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radioInline" id="inlineRadioDefault" value="grouped">
+                <label class="form-check-label" for="inlineRadioDefault">Сгруппировать по повторным</label>
+                </div>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="radioInline" id="inlineRadioChecked" checked="" value="all">
+                <label class="form-check-label" for="inlineRadioChecked">Показать все</label>
+                </div>
+            </div>
+        </div>
+        <div class="row ms-2 mt-2 align-items-center">
+            <div class="col-auto input-control">
+            <label for="inputSize" class="form-control-label text-muted">Число пациентов на страницу</label>
+            <input type="number" class="form-control mb-3" min="1" id="inputSize" value="5" placeholder="5">
+            </div>
+            <div class="col"></div>
+            <div class="me-2 col-auto">
+            <button type="submit" class="common btn btn-primary " id="search">Поиск</button>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-2" id="listOfInspection">
+      </div>
+    <ul id="pagination" class="pagination"></ul>
+</div>
+
+<script src="/consultations.js"></script>
+    

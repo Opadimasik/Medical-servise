@@ -46,6 +46,11 @@ app.get('/inspection/create', (req, res) => {
         title:'Создание осмотра' 
     });
 });
+app.get('/consultations', (req, res) => {
+    res.render('consultations', {
+        title:'Конссультации' 
+    });
+});
 app.listen(port,host, function () {
     console.log(`Server listens http://${host}:${port}`);
 });

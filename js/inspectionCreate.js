@@ -50,7 +50,7 @@ $('#inputSpeciality').select2({
   });
 
 // date control
-var datetimeControl = document.querySelector('input[type="datetime-local"]');
+var datetimeControl = document.getElementById("inputInspectDate");
 var now = new Date().toISOString().split('.')[0];
 datetimeControl.max = now;
 
@@ -248,8 +248,112 @@ $('#inputMKB-10').select2({
 }
 
 //Conclusion
+var conclusionSelect = $('#inputСonclusion');
+var visitDateInput = $('#inputVisitDateGroup');
 
-// cofirm or not
+conclusionSelect.on('change', function() {
+    var selectedConclusion = conclusionSelect.val();
+    switch (selectedConclusion) {
+        case 'Disease':
+            visitDateInput.removeClass('d-none');
+            break;
+        case 'Recovery':
+            visitDateInput.addClass('d-none');
+            break;
+        case 'Death':
+            visitDateInput.removeClass('d-none');
+            $("#inputInspectDateLabel").text("Дата и время смерти")
+            break;
+        default:
+            // visitDateInput.attr('disabled', 'true');
+            break;
+    }
+});
+
+
 $("#register").click(function(){
     window.location.href = `/patient/${patientId}`
 })
+
+var isFirstInspect = $('#isFirstInspect').prop('checked');
+var previousInspectionId = isFirstInspect ? `"previousInspectionId": "${preInspectionId}",` :"";
+var inspectDate = $('#inputInspectDate').val();
+var complaints = $('#complaints').val();
+var anamnesis = $('#anamnesis').val();
+var isConsultationRequired = $('#isConsultation').prop('checked');
+var specialityId = isConsultationRequired ? $('#inputSpeciality').val() : null;
+var consultationComment = isConsultationRequired ? $('#consultationComment').val() : null;
+var diagnoses = [];
+
+$('#addDiagnose').find('div').each(function(index, element) {
+    var selectedDiagnose = $(element).find('strong').text();
+    var selectedType = $(element).find('.text-muted').eq(0).text().replace('Тип в осмотре: ', '');
+    var description = $(element).find('.text-muted').eq(1).text().replace('Расшифровка: ', '');
+
+    var diagnose = {
+        icdDiagnosisId: selectedDiagnose.id,
+        description: description,
+        type: selectedType
+    };
+
+    diagnoses.push(diagnose);
+});
+
+// Получение данных о заключении
+var selectedConclusion = $('#inputСonclusion').val();
+var nextVisitDate = null;
+var deathDate = null;
+
+if (selectedConclusion === 'Disease' || selectedConclusion === 'Death') {
+    nextVisitDate = $('#inputVisitDate').val();
+}
+
+if (selectedConclusion === 'Death') {
+    deathDate = $('#inputVisitDate').val();
+}
+
+// Формирование объекта запроса
+var inspectionData = {
+    date: inspectDate,
+    isFirstInspect: isFirstInspect,
+    preInspectionId: preInspectionId,
+    complaints: complaints,
+    anamnesis: anamnesis,
+    consultation: {
+        isRequired: isConsultationRequired,
+        specialityId: specialityId,
+        comment: consultationComment
+    },
+    diagnoses: diagnoses,
+    conclusion: {
+        conclusion: selectedConclusion,
+        nextVisitDate: nextVisitDate,
+        deathDate: deathDate
+    }
+};
+
+$('#login').click(function()
+{
+    console.log(inspectionData);
+    $.ajax({
+        url: `https://mis-api.kreosoft.space/api/patient/${patientId}/inspections`,
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + authToken,
+            'Content-Type': 'application/json'
+        },
+        data: JSON.stringify(inspectionData),
+        success: function (response) {
+            // Обработка успешного ответа сервера
+            console.log(response);
+        },
+        error: function (error, status) {
+            // Обработка ошибки
+            console.error("Ошибка при создании осмотра:", error);
+            if (status === 401) {
+                window.location.href = '/login';
+            }
+        }
+    });
+});
+

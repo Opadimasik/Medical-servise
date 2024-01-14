@@ -137,14 +137,14 @@
                     <label for="inputСonclusion" class="form-label text-muted">Заключения</label>
                     <select class="form-select" aria-label="Default select example" id="inputСonclusion">
                         <option value="" disabled selected id="example">Выберите заключение</option>
-                        <option value="Disease">Заболевание</option>
-                        <option value="Recovery">Восстановление</option>
+                        <option value="Disease">Болезнь</option>
+                        <option value="Recovery">Выздоровление</option>
                         <option value="Death">Смерть</option>
                     </select>
                 </div>
-                <div class="ms-3">
-                    <label for="inputInspectDate" class="form-label text-muted">Дата следующего визита</label>
-                    <input type="datetime-local" class="form-control" id="inputVisitDate" min="1900-01-01" required="">
+                <div class="ms-3 d-none" id="inputVisitDateGroup">
+                    <label for="inputInspectDate" id="inputInspectDateLabel" class="form-label text-muted">Дата следующего визита</label>
+                    <input type="datetime-local" class="form-control " id="inputVisitDate" min="1900-01-01" required="">
                     <div id="infoDate" style="text-align: center; color: rgb(235, 43, 43);"></div>
                 </div>
             </div>
